@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Registracija</title>
+        <link rel="stylesheet" href="/style/registerPage.css">
+    </head>
+    
+    <body>
+        <a href="/login">
+            <div class="d">
+                <b>Natrag</b>
+            </div>
+        </a>
+
+        <div class="container">
+            <div class="form">
+                <div th:if="${errorMessage != null}" th:utext="${errorMessage}" class="error">...</div>
+
+                <form action="/register" th:object="${korisnikForm}" method="POST">
+                    <div class="input-box">
+                        <input type="text" name='firstName' placeholder="Ime" th:field="*{firstName}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name='lastName' placeholder="Prezime" th:field="*{lastName}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name='email' placeholder="email" th:field="*{email}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name='company' placeholder="Tvrtka" th:field="*{company}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name='userName' placeholder="Korisničko ime" th:field="*{userName}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" placeholder="Lozinka" th:field="*{password}" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" placeholder="Potvrdi Lozinku" th:field="*{confirmPassword}" required>
+                    </div>
+
+                    <div class="input-box button">
+                        <input type="submit" name="submit" value="Registriraj se">
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('firstName')}">
+                        <span th:errors="*{firstName}">Potvrđena lozinka nije ispravna</span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('lastName')}">
+                        <span th:errors="*{lastName}"></span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('email')}">
+                        <span th:errors="*{email}"></span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('company')}">
+                        <span th:errors="*{company}"></span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('userName')}">
+                        <span th:errors="*{userName}"></span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('password')}">
+                        <span th:errors="*{password}"></span>
+                    </div>
+
+                    <div class="sp" th:if="${#fields.hasErrors('confirmPassword')}">
+                        <span th:errors="*{confirmPassword}"></span>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <img src="/images/slika2.png" height="400px" alt="slika">
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>O meni</title>
+        <link rel="stylesheet" href="/style/data.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/podaci/uredi">
+                    <div class="d">
+                        <b>Uredi</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="intro">
+            <table class="intro2">
+                <tr>
+                    <td class="intro3">Ime:</td>
+                    <td class="intro4" th:text="${korisnik.ime}"></td>
+                </tr>
+
+                <tr>
+                    <td class="intro3">Prezime:</td>
+                    <td class="intro4" th:text="${korisnik.prezime}"></td>
+                </tr>
+
+                <tr>
+                    <td class="intro3">Korisničko ime:</td>
+                    <td class="intro4" th:text="${korisnik.korisnickoIme}"></td>
+                </tr>
+
+                <tr>
+                    <td class="intro3">Email:</td>
+                    <td class="intro4" th:text="${korisnik.email}"></td>
+                </tr>
+
+                <tr>
+                    <td class="intro3">Tvrtka:</td>
+                    <td class="intro4" th:text="${korisnik.tvrtka}"></td>
+                </tr>
+            </table>
+
+            <img src="/images/slika15.jpg" height="500px" alt="slika">
+        </div>
+    </body>
+</html>

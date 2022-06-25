@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uredi posao</title>
+        <link rel="stylesheet" href="/style/updateJobPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/posao' + ${posao.ID}">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <form th:action="'/korisnik/posao' + ${posao.ID} + '/uredi'" method="POST">
+            <div class="intro">
+                <h2>Uredi posao</h2>
+
+                <table class="intro2">
+                    <tr>
+                        <td class="intro3">Naziv:</td>
+                        <td>
+                            <input type="text" th:name='name' th:value="${posao.naziv}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Adresa:</td>
+                        <td>
+                            <input type="text" th:name='address' th:value="${posao.adresa}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Objekt:</td>
+                        <td>
+                            <input type="text" th:name='object' th:value="${posao.objekt}" required>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="l2">
+                    <input type="submit" name="submit" value="Uredi">
+                </div>
+
+                <div class="sp" th:if="${error != null}">
+                    <span th:utext="${error}"></span>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

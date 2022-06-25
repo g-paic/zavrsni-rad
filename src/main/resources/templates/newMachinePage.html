@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Novi stroj</title>
+        <link rel="stylesheet" href="/style/newMachinePage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/strojevi">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <img src="/images/slika11.jpg" alt="user">
+
+            <form action="/korisnik/noviStroj" method="POST">
+                <div class="form">
+                    <div>
+                        Novi stroj:
+                        <input type="text" th:name='name' placeholder="Naziv" required>
+                    </div>
+
+                    <div class="l2">
+                        <input type="submit" name="submit" value="Dodaj">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="sp" th:if="${error != null}">
+            <span th:utext="${error}"></span>
+        </div>
+    </body>
+</html>

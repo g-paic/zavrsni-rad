@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Poslovi</title>
+        <link rel="stylesheet" href="/style/jobsListPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a th:href="@{/korisnik/noviPosao}">
+                    <div class="d">
+                        <b>Novi posao</b>
+                    </div>
+                </a>
+
+                <a th:if="${#lists.isEmpty(jobs) == false}" th:href="@{/korisnik/excel}">
+                    <div class="d">
+                        <b>Podaci u excelu</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h1>Poslovi</h2>
+
+        <div th:if="${#lists.isEmpty(jobs) == false}">
+            <div class="list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Posao</th>
+                            <th>Datum početka</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="job: ${jobs}">
+                            <td>
+                                <a th:href="'/korisnik/posao' + ${job.ID}" th:text="${job.naziv}"></a>
+                            </td>
+                            <td th:text="${job.datumPocetka}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(jobs) == true}">
+            <span>Nemate poslove</span>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Strojevi</title>
+        <link rel="stylesheet" href="/style/machinesListPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a th:href="@{/korisnik/noviStroj}">
+                    <div class="d">
+                        <b>Dodaj stroj</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h1>Strojevi</h1>
+
+        <div class="con" th:if="${#lists.isEmpty(machines) == false}">
+            <div class="col" th:each="machine: ${machines}">
+                <a th:href="'/korisnik/stroj' + ${machine.ID}">
+                    <div th:text="${machine.naziv}"></div>
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(machines) == true}">
+            <span>Nemate strojeve</span>
+        </div>
+    </body>
+</html>

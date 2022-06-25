@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Novi materijal</title>
+        <link rel="stylesheet" href="/style/materialForJob.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/posao' + ${posaoID}">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <form th:action="@{'/korisnik/dodajMaterijal' + ${posaoID}}" th:object="${materijalForm}" method="POST">
+                <div class="form">
+                    <h4>Materijal</h4>
+
+                    <div class="l">
+                        <label>Naziv:</label>
+                        <input type="text" th:name='name' placeholder="naziv" th:field="*{name}" required>
+                    </div>
+
+                    <div class="l">
+                        <label>Cijena:</label>
+                        <input type="number" th:name='price' placeholder="cijena" th:field="*{price}" required>
+                    </div>
+
+                    <div class="l2">
+                        <input type="submit" name="submit" value="Dodaj">
+                    </div>
+                </div>
+            </form>
+
+            <img src="/images/slika13.jpg" height="400px" alt="user">
+        </div>
+
+        <div class="sp" th:if="${error != null}">
+            <span th:utext="${error}"></span>
+        </div>
+    </body>
+</html>

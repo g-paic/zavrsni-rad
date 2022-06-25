@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Novi posao</title>
+        <link rel="stylesheet" href="/style/newJobPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/poslovi">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <form action="/korisnik/noviPosao" th:object="${posaoForm}" method="POST">
+            <div class="intro">
+                <h2>Novi posao</h2>
+
+                <table class="intro2">
+                    <tr>
+                        <td class="intro3">Naziv:</td>
+                        <td>
+                            <input type="text" th:name='name' placeholder="naziv" th:field="*{name}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Datum početka:</td>
+                        <td>
+                            <input class="intro4" type="date" th:name='dateStart' placeholder="datum1" th:field="*{dateStart}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Datum kraja:</td>
+                        <td>
+                            <input class="intro4" type="date" th:name='dateEnd' placeholder="datum2" th:field="*{dateEnd}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Adresa:</td>
+                        <td>
+                            <input type="text" th:name='address' placeholder="adresa" th:field="*{address}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Objekt:</td>
+                        <td>
+                            <input type="text" th:name='object' placeholder="objekt" th:field="*{object}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="intro3">Prihod:</td>
+                        <td>
+                            <input type="number" th:name='income' placeholder="prihod" th:field="*{income}" required>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="l2">
+                    <input type="submit" name="submit" value="Dalje">
+                </div>
+
+                <div class="sp" th:if="${error != null}">
+                    <span th:utext="${error}"></span>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

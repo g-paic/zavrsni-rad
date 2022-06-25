@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pie Chart</title>
+    </head>
+    
+    <body>
+        <div id="container" style="height: 400px"></div>
+
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </body>
+    
+    <script th:inline="javascript">
+        var data = /*[[${data}]]*/ [];
+        console.log(data);
+        var series = [];
+        var data = [];
+
+        for(var i = 0; i < data.length; i++) {
+            var object = {};
+            object.name = data[i].name;
+            object.cost = data[i].cost;
+            data.push(object);
+        }
+
+        var seriesObject = {
+            name: 'Trošak',
+            colorByPoint: true,
+            data: data
+        };
+
+        series.push(seriesObject);
+        drawPieChart(series);
+
+        function drawPieChart(series) {
+            Highcharts.chart('container', {
+                chart: {      
+                    type: 'pie'
+                },
+            
+                title: {
+                    text: 'Browser market shares in January, 2018'
+                },
+
+                tooltip: {
+                    formatter: function() {
+                        return '<strong>' + this.key + ': </strong>' + this.cost;
+                    }
+                },
+
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.cost}'
+                        }
+                    }
+                },
+            
+                series: series
+            });
+        }
+    </script>
+</html> 

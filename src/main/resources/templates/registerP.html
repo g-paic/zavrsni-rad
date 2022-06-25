@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <title>Register</title>
+    <!--link za ikone "fas fa-user" i "fas fa-lock"-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style/login.css">
+</head>
+
+<body>
+    <div>
+        <div th:if="${#request.getParameter('error') == 'true'}" style="color:red;margin:10px 0px;">
+            Login Failed!!!<br/> Reason:
+            <span th:if="${#session != null AND #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}" th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+            </span>
+        </div>
+
+        <div>
+            <div>
+                <div class="login-form">
+                    <div class="title">Registracija - vlasnik ljubimca</div>
+                    <div th:if="${errorMessage != null}" th:utext="${errorMessage}" class="error">...</div>
+
+
+                    <form name='f' th:action="@{/registerOsoba}" th:object="${appOsobaForm}" method='POST'>
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name='username' placeholder="Korisničko ime" th:field="*{username}" required>
+                            </div>
+
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" placeholder="Lozinka" th:field="*{password}" required>
+                            </div>
+
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" placeholder="Potvrdi Lozinku" th:field="*{confirmPassword}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-mail-bulk"></i>
+                                <input type="email" name='email' placeholder="Email" th:field="*{email}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user-alt"></i>
+                                <input type="text" name='firstName' placeholder="Ime" th:field="*{firstName}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user-alt"></i>
+                                <input type="text" name='lastName' placeholder="Prezime" th:field="*{lastName}" required>
+                            </div>
+
+
+                            <div class="button input-box">
+                                <input type="submit" name="submit" value="Registriraj me">
+                            </div>
+
+                            <div class="text sign-up-text">
+                                <a th:href="@{./}">Cancel</a>
+                            </div>
+
+                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">..</div>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</div>
+                            <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</div>
+                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</div>
+                            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">..</div>
+                            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">..</div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="nl-logo">
+                    <img class="logo" src="./images/logo7.png" alt="">
+                </div>
+        </div>
+    </body>
+</html>

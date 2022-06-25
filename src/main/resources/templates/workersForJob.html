@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Radnici za rad</title>
+        <link rel="stylesheet" href="/style/workersForJob.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/posao' + ${posao.ID}">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <div th:if="${#lists.isEmpty(workersReady) == false}">
+                <div class="form">
+                    <h3>Popis radnika</h3>
+                    <ul class="l" th:each="radnik: ${workersReady}">
+                        <li>
+                            <a th:href="@{'/korisnik/dodajRadnika' + ${posao.ID} + '/' + ${radnik.ID}}" th:text="${radnik.korisnickoIme}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div th:if="${#lists.isEmpty(workersReady) == true}">
+                <div class="form">
+                    <p>Nemate radnike na raspolaganju</p>
+                </div>
+            </div>
+
+            <img src="/images/slika4.jpg" height="400px" alt="user">
+        </div>
+    </body>
+</html>

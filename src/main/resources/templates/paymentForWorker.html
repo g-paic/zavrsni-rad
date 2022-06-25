@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Isplata</title>
+        <link rel="stylesheet" href="/style/paymentForWorker.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/dodajRadnika' + ${posaoID}">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <div class="form">
+                <form th:action="@{'/korisnik/dodajRadnika' + ${posaoID} + '/' + ${radnik.ID}}" method="POST">
+                    <div>
+                        <label th:text="'Odredi isplatu za radnika ' + ${radnik.korisnickoIme} + ':'"></label>
+                        <input type="number" th:name='isplata' placeholder="isplata" required>
+                    </div>
+                    <div class="l2">
+                        <input type="submit" name="submit" value="Dodaj">
+                    </div>
+                </form>
+            </div>
+
+            <div class="sp" th:if="${error != null}">
+                <span th:utext="${error}"></span>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Profil</title>
+
+        <!-- CSS for full calender -->
+        <link href="https://fullcalendar.io/js/fullcalendar-3.8.2/fullcalendar.min.css" rel="stylesheet" />
+        <!-- JS for jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- JS for full calender -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js"></script>
+
+        <link rel="stylesheet" href="/style/profilPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <a th:href="@{/korisnik/podaci}">
+                <div class="page">
+                    <b>O MENI</b>
+                </div>
+            </a>
+
+            <a th:href="@{/korisnik/strojevi}">
+                <div class="page">
+                    <b>STROJEVI</b>
+                </div>
+            </a>
+
+            <a th:href="@{/korisnik/radnici}">
+                <div class="page">
+                    <b>RADNICI</b>
+                </div>
+            </a>
+
+            <a th:href="@{/korisnik/zarade}">
+                <div class="page">
+                    <b>ZARADE</b>
+                </div>
+            </a>
+
+            <a th:href="@{/korisnik/troškovi}">
+                <div class="page">
+                    <b>TROŠKOVI</b>
+                </div>
+            </a>
+
+            <a th:href="@{/korisnik/poslovi}">
+                <div class="page">
+                    <b>POSLOVI</b>
+                </div>
+            </a>
+            
+        </div>
+
+        <div id="calendar"></div>
+    </body>
+    
+    <script th:inline="javascript">
+        var data = /*[[${list2}]]*/ {};
+        console.log(data);
+
+       $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                defaultView: 'month',
+                events: data
+            });
+        });
+    </script>
+</html>

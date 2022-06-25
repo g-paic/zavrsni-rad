@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Posao</title>
+        <link rel="stylesheet" href="/style/jobPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a th:href="@{'/korisnik/posao' + ${posao.ID} + '/uredi'}">
+                    <div class="d">
+                        <b>Uredi</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/poslovi">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="intro">
+            <table class="intro2">
+                <tr>
+                    <td class="intro3">Naziv:</td>
+                    <td class="intro4" th:text="${posao.naziv}"></td>
+                </tr>
+                <tr>
+                    <td class="intro3">Datum početka:</td>
+                    <td class="intro4" th:text="${posao.datumPocetka}"></td>
+                </tr>
+                <tr>
+                    <td class="intro3">Datum kraja:</td>
+                    <td class="intro4" th:text="${posao.datumKraja}"></td>
+                </tr>
+                <tr>
+                    <td class="intro3">Adresa:</td>
+                    <td class="intro4" th:text="${posao.adresa}"></td>
+                </tr>
+                <tr>
+                    <td class="intro3">Objekt:</td>
+                    <td class="intro4" th:text="${posao.objekt}"></td>
+                </tr>
+                <tr>
+                    <td class="intro3">Zarada:</td>
+                    <td class="intro4" th:text="${posao.zarada}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="lists">
+            <div class="list">
+                <h3>Strojevi</h3>
+
+                <div th:if="${#lists.isEmpty(machinesReady) == false}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stroj</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="mac: ${machinesReady}">
+                                <td th:text="${mac.naziv}">s</td>
+                                <td>
+                                    <form th:action="@{'/korisnik/makniStroj/' + ${posao.ID} + '/' + ${mac.ID}}" method="GET">
+                                        <input type="submit" name="submit" value="Ukloni">
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${#lists.isEmpty(machinesReady) == true}">
+                    <p class="p">Nema dodijeljenih strojeva</p>
+                </div>
+                
+                <a th:href="@{'/korisnik/dodajStroj' + ${posao.ID}}">
+                    <div class="d d2">
+                        Dodaj stroj
+                    </div>
+                </a>
+            </div>
+
+            <div class="list">
+                <h3>Radnici</h3>
+
+                <div th:if="${#lists.isEmpty(radnici) == false}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Radnik</th>
+                                <th>Isplata</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="radnik: ${radnici}">
+                                <td th:text="${radnik.korisnickoIme}"></td>
+                                <td th:text="${radnik.isplata}"></td>
+                                <td>
+                                    <form th:action="@{'/korisnik/makniRadnika/' + ${posao.ID} + '/' + ${radnik.ID}}" method="GET">
+                                        <input type="submit" name="submit" value="Ukloni">
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${#lists.isEmpty(radnici) == true}">
+                    <p class="p">Nema dodijeljenih radnika</p>
+                </div>
+
+                <a th:href="@{'/korisnik/dodajRadnika' + ${posao.ID}}">
+                    <div class="d d2">
+                        Dodaj radnika
+                    </div>
+                </a>
+            </div>
+
+            <div class="list">
+                <h3>Materijali</h3>
+
+                <div th:if="${#lists.isEmpty(materijali) == false}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Materijal</th>
+                                <th>Cijena</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="material: ${materijali}">
+                                <td th:text="${material.naziv}"></td>
+                                <td th:text="${material.cijena}"></td>
+                                <td>
+                                    <form th:action="@{'/korisnik/makniMaterijal/' + ${posao.ID} + '/' + ${material.ID}}" method="GET">
+                                        <input type="submit" name="submit" value="Ukloni">
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${#lists.isEmpty(materijali) == true}">
+                    <p class="p">Nema dodijeljenih materijala</p>
+                </div>
+
+            
+                <a th:href="@{'/korisnik/dodajMaterijal' + ${posao.ID}}">
+                    <div class="d d2">
+                        Dodaj materijal
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(pieList) == false}">
+            <div id="container" style="height: 400px"></div>
+
+            <script src="http://code.highcharts.com/highcharts.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        </div>
+    </body>
+
+    <script th:inline="javascript">
+        var pieList = /*[[${pieList}]]*/ [];
+        console.log(pieList);
+        var series = [];
+        var data = [];
+
+        for(var i = 0; i < pieList.length; i++) {
+            var object = {};
+            object.name = pieList[i].naziv;
+            object.y = pieList[i].trošak;
+            data.push(object);
+        }
+
+        var seriesObject = {
+            name: 'Trošak',
+            colorByPoint: true,
+            data: data
+        };
+
+        series.push(seriesObject);
+
+        drawPieChart(data);
+
+        function drawPieChart(data) {
+            Highcharts.chart('container', {
+                chart: {      
+                    type: 'pie'
+                },
+            
+                title: {
+                    text: 'Troškovi'
+                },
+
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y} kn</b>'
+                },
+
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>'
+                        }
+                    }
+                },
+            
+                series: [{
+                    name: 'Trošak',
+                    colorByPoint: true,
+                    data: data
+                }]
+            });
+        }
+    </script>
+</html>

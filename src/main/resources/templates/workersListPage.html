@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Radnici</title>
+        <link rel="stylesheet" href="/style/workersListPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a th:href="@{/korisnik/noviRadnik}">
+                    <div class="d">
+                        <b>Dodaj radnika</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h1>Radnici</h1>
+
+        <div class="con" th:if="${#lists.isEmpty(workers) == false}">
+            <div class="col" th:each="worker: ${workers}">
+                <a th:href="'/korisnik/radnik' + ${worker.ID}">
+                    <div th:text="${worker.ime} + ' ' + ${worker.prezime} + ' (' + ${worker.korisnickoIme} + ')'"></div>
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(workers) == true}">
+            <span>Nemate radnike</span>
+        </div>
+    </body>
+</html>

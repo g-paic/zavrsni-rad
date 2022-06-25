@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Stroj</title>
+
+        <!-- CSS for full calender -->
+        <link href="https://fullcalendar.io/js/fullcalendar-3.8.2/fullcalendar.min.css" rel="stylesheet" />
+        <!-- JS for jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- JS for full calender -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js"></script>
+
+        <link rel="stylesheet" href="/style/machinePage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a th:href="'/korisnik/stroj' + ${stroj.ID} + '/servis'">
+                    <div class="d">
+                        <b>Servis</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/stroj' + ${stroj.ID} + '/uredi'">
+                    <div class="d">
+                        <b>Uredi</b>
+                    </div>
+                </a>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/strojevi">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h1 th:text="${stroj.naziv}"></h1>
+
+        <div class="list">
+            <div th:if="${#lists.isEmpty(list2) == false}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Servisi</th>
+                        </tr>
+                        <tr>
+                            <th>Datum početka</th>
+                            <th>Datum kraja</th>
+                            <th>Cijena</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="p: ${list2}">
+                            <td th:text="${p.start}"></td>
+                            <td th:text="${p.end}"></td>
+                            <td th:text="${p.cost}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${#lists.isEmpty(list3) == false}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Poslovi</th>
+                        </tr>
+                        <tr>
+                            <th>Posao</th>
+                            <th>Datum početka</th>
+                            <th>Datum kraja</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="p: ${list3}">
+                            <td th:text="${p.title}"></td>
+                            <td th:text="${p.start}"></td>
+                            <td th:text="${p.end}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="calendar"></div>
+
+        <div class="link">
+            <div th:if="${#lists.isEmpty(list) == true}">
+                <form th:action="'/korisnik/ukloniStroj' + ${stroj.ID}" method="POST">
+                    <input type="submit" name="submit" value="Ukloni">
+                </form>
+            </div>
+        </div>
+    </body>
+
+    <script th:inline="javascript">
+        var data = /*[[${list}]]*/ {};
+        console.log(data);
+
+       $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                defaultView: 'month',
+                events: data
+            });
+        });
+    </script>
+</html>

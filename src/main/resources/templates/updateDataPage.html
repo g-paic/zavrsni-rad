@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uredi podatke</title>
+        <link rel="stylesheet" href="/style/updateDataPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/podaci">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <form action="/korisnik/podaci/uredi" method='POST'>
+                <div class="intro">
+                    <table class="intro2">
+                        <tr>
+                            <td class="intro3">Ime:</td>
+                            <td>
+                                <input type="text" th:name='ime' th:value="${korisnik.ime}" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="intro3">Prezime:</td>
+                            <td>
+                                <input type="text" th:name='prezime' th:value="${korisnik.prezime}" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="intro3">Korisničko ime:</td>
+                            <td>
+                                <input type="text" th:name='korisnickoIme' th:value="${korisnik.korisnickoIme}" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="intro3">Email:</td>
+                            <td>
+                                <input type="email" th:name='email' th:value="${korisnik.email}" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="intro3">Tvrtka:</td>
+                            <td>
+                                <input type="text" th:name='tvrtka' th:value="${korisnik.tvrtka}" required>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="l2">
+                        <input type="submit" name="submit" value="Uredi">
+                    </div>
+                </div>
+            </form>
+
+            <img src="/images/slika15.jpg" height="500px" alt="slika">
+        </div>
+
+        <div class="sp" th:if="${error != null}">
+            <span th:utext="${error}"></span>
+        </div>
+    </body>
+</html>

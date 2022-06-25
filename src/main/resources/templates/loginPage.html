@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style/loginPage.css">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="form">
+                <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+                    <div class="input-box">
+                        <input type="text" th:name='username' placeholder="Korisničko ime" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" th:name='password' placeholder="Lozinka" required>
+                    </div>
+
+                    <div class="input-box button">
+                        <input type="submit" name="submit" value="Prijavi se"><br/>
+                    </div>
+                </form>
+
+                <div class="r">
+                    Nemate račun? Registrirajte se <a th:href="@{./register}">ovdje</a>
+                </div>
+            </div>
+
+            <div>
+                <img src="/images/slika2.png" height="300px" alt="slika">
+            </div>
+        </div>
+        
+        <div class="sp" th:if="${#request.getParameter('error') == 'true'}">
+            <span>Krivo korisničko ime ili lozinka</span>
+        </div>
+    </body>
+</html>

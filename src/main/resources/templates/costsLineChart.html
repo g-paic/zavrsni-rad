@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Troškovi</title>
+        <link rel="stylesheet" href="/style/costsLineChart.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="cal">
+            <div id="container" style="height: 400px"></div>
+        </div>
+
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </body>
+
+    <script th:inline="javascript">
+        var formattedData = /*[[${list2}]]*/ [];
+        console.log(formattedData);
+        var naziv = [];
+        var iznos = [];
+
+        for (var i = 0; i < formattedData.length; i++) {
+            naziv.push(formattedData[i].naziv);
+            iznos.push(formattedData[i].iznos);
+        }
+
+        drawLineChart(naziv, iznos);
+
+        function drawLineChart(naziv, iznos) {
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line',
+                    width: 500
+                },
+                
+                title: {
+                    text: 'Troškovi po poslovima'
+                },
+
+                xAxis: {
+                    categories: naziv
+                },
+
+                tooltip: {
+                    formatter: function() {
+                        return '<strong>' + this.x + ': </strong>' + this.y;
+                    }
+                },
+
+                series: [{
+                    data: iznos
+                }]
+            });
+        }
+    </script>
+</html>

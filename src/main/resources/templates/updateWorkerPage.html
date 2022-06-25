@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uredi</title>
+        <link rel="stylesheet" href="/style/updateWorkerPage.css">
+    </head>
+    
+    <body>
+        <div class="c">
+            <div class="b">
+                <img src="/images/slika7.png" height="40px" alt="user">
+                <div class="e">
+                    <b th:text="${user.Username}"></b>
+                </div>
+            </div>
+
+            <div class="b">
+                <a href="/korisnik/profil">
+                    <div class="d">
+                        <b>Početna</b>
+                    </div>
+                </a>
+
+                <a th:href="'/korisnik/radnik' + ${radnik.ID}">
+                    <div class="d">
+                        <b>Natrag</b>
+                    </div>
+                </a>
+
+                <a href="/logout">
+                    <div class="d">
+                        <b>Odjava</b>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="link">
+            <form th:action="'/korisnik/radnik' + ${radnik.ID} + '/uredi'" method="POST">
+                <div class="form">
+                    <div class="l">
+                        <label>Ime:</label>
+                        <input type="text" th:name='firstName' th:value='${radnik.ime}' required>
+                    </div>
+
+                    <div class="l">
+                        <label>Prezime:</label>
+                        <input type="text" th:name='lastName' th:value="${radnik.prezime}" required>
+                    </div>
+
+                    <div class="l">
+                        <label>Korisničko ime:</label>
+                        <input type="text" th:name='userName' th:value="${radnik.korisnickoIme}" required>
+                    </div>
+
+                    <div class="l2">
+                        <input type="submit" name="submit" value="Uredi">
+                    </div>
+                </div>
+            </form>
+
+            <img src="/images/slika3.png" height="400px" alt="user">
+        </div>
+
+        <div class="sp" th:if="${error != null}">
+            <span th:utext="${error}"></span>
+        </div>
+    </body>
+</html>

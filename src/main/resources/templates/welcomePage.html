@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:utext="${title}"></title>
+    <link rel="stylesheet" href="/style/welcomePage.css">
+  </head>
+  
+  <body>
+    <div class="form">
+      <h2><b>Dobro došli</b></h2>
+
+      <a class="d" th:href="@{/login}">
+        <b>Prijavi se</b>
+      </a>
+    </div>
+
+    <img src="/images/slika.png" alt="slika" height="600px">
+  </body>
+</html>
